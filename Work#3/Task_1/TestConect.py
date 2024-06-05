@@ -54,6 +54,12 @@ plot_temperature_distribution(df)
 
 client = InsecureClient('http://172.18.0.4:50070/')
 
+# Сохранение изображений в HDFS
+client = pa.hdfs.connect()
 with open('/Users/Esdesu/Desktop/JreJre/BigData/HomeWork/BigData/Work#3/Task_1/screan/temp_change.png', 'rb') as file:
-    with client.write('tmp/temp_change_new.png') as output_file:
+    with client.open('/path_in_hdfs/temp_change_new.png', 'wb') as output_file:
+        output_file.write(file.read())
+
+with open('/Users/Esdesu/Desktop/JreJre/BigData/HomeWork/BigData/Work#3/Task_1/screan/temp_distribution.png', 'rb') as file:
+    with client.open('/path_in_hdfs/temp_distribution_new.png', 'wb') as output_file:
         output_file.write(file.read())
